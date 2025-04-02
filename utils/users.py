@@ -55,10 +55,8 @@ def edit_field_employee(msg, field, value):
                         f"Profile image: {user['profile_img']}\n"
                         f"Description: {user['description']}\n"
                         f"Skills: {user['skills']}\n"
-                        f"Locations: {user['locations']}\n"
                         f"Experience: {user['experience']}\n"
-                        f"Direction: {user['direction']}\n"
-                        f"Salary: {user['salary']}\n")
+                        f"Direction: {user['direction']}\n")
 
     with open("data/employee.json", "w") as f:
         json.dump(emp, f, indent=4)

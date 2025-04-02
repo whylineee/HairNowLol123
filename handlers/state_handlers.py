@@ -2,6 +2,7 @@ from aiogram import Router, types
 from states.edit_user_states import EditDescUser
 from aiogram.fsm.context import FSMContext
 from utils.users import edit_field_employee
+from states.search_state import SearchEmployee
 
 router = Router()
 
@@ -12,3 +13,4 @@ async def edit_desc_handler(message: types.Message, state: FSMContext):
     msg_text = edit_field_employee(message, "description", data)
     await message.answer(msg_text)
     await state.clear()
+

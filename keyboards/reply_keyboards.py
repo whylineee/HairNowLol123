@@ -4,8 +4,8 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 def get_main_keyboard() -> ReplyKeyboardMarkup:
     keyboard = ReplyKeyboardMarkup(
         keyboard=[
-            [KeyboardButton(text="Меню")],[KeyboardButton(text="Шукати вакансію")],
-            [KeyboardButton(text="Анкета"), KeyboardButton(text="Про нас")],
+            [KeyboardButton(text="🎮Меню🎮")],[KeyboardButton(text="Шукати вакансію")],
+            [KeyboardButton(text="📡Анкета📡"), KeyboardButton(text="Про нас")],
             [KeyboardButton(text="Підтримка 24/7")]
         ],
         resize_keyboard=True
@@ -19,7 +19,6 @@ def get_quiz_keyboard() -> ReplyKeyboardMarkup:
             [KeyboardButton(text="1. Поміняти фото")],
             [KeyboardButton(text="2. Поміняти текст"), KeyboardButton(text="3. Вибрати Технології/Навички")],
             [KeyboardButton(text="4. Вибрати Локацію роботи"), KeyboardButton(text="5. Описати свій досвід роботи в IT ")],
-            [KeyboardButton(text="6. Вибрати напрямок розробки "),  KeyboardButton(text="7. Вибрати зарплатний діапазон")],
             [KeyboardButton(text="Головне меню")],
         ],
         resize_keyboard=True
@@ -53,9 +52,8 @@ def get_workstation_keyboard() -> ReplyKeyboardMarkup:
 def get_workstation_menu_keyboard() -> ReplyKeyboardMarkup:
     keyboard = ReplyKeyboardMarkup(
         keyboard=[
-            [KeyboardButton(text="1.DFASDSAD")],
-            [KeyboardButton(text="2. вASDASDап "),],
-            [KeyboardButton(text="3. ПомASDASDіняти мову"), KeyboardButton(text="4. Про новASDASDASDу версію бота")],
+            [KeyboardButton(text="1. Назва Компанії"), KeyboardButton(text="2. Опис вакансії"),],
+            [KeyboardButton(text="3. Кого ви шукаєте "), KeyboardButton(text="4. Зарплатний діпазон")],
             [KeyboardButton(text="Головне меню 💻")]
 
 

@@ -1,14 +1,17 @@
+import json
+
 from aiogram import types, Router
 from keyboards.reply_keyboards import get_quiz_keyboard, get_main_keyboard, get_searchion_keyboard, \
     get_workstation_keyboard, get_workstation_menu_keyboard
 from aiogram.fsm.context import FSMContext
 
 from states.edit_user_states import EditDescUser
+from states.search_state import SearchEmployee
 
 router = Router()
 
 
-@router.message(lambda message: message.text == "Меню")
+@router.message(lambda message: message.text == "🎮Меню🎮")
 async def test_handler(message: types.Message):
     await message.answer("""Головне меню""", reply_markup=get_searchion_keyboard())
 
@@ -25,7 +28,7 @@ async def questionnaire_handler(message: types.Message):
     await message.answer("""Цей бот створив : whylineee
     ПІБ: Савин Марко Андрійович""", reply_markup=get_main_keyboard())
 
-@router.message(lambda message: message.text == "Анкета")
+@router.message(lambda message: message.text == "📡Анкета📡")
 async def questionnaire_handler(message: types.Message):
     await message.answer("""Ваша анкета""", reply_markup=get_quiz_keyboard())
 
@@ -36,7 +39,7 @@ async def questionnaire_handler(message: types.Message):
 
 @router.message(lambda message: message.text == "Головне меню 💻")
 async def questionnaire_handler(message: types.Message):
-    await message.answer("""Головне меadsню""", reply_markup=get_workstation_keyboard())
+    await message.answer("""Головне меню""", reply_markup=get_workstation_keyboard())
 
 @router.message(lambda message: message.text == "Про нас✏️")
 async def questionnaire_handler(message: types.Message):
@@ -60,3 +63,14 @@ async def questionnaire_handler(message: types.Message):
 async def questionnaire_handler(message: types.Message, state: FSMContext):
     await message.answer("""Введіть новий текст""")
     await state.set_state(EditDescUser.edit_e_desc)
+
+@router.message(lambda message: message.text == "Шукати робітників")
+async def questionnaire_handler(message: types.Message, state: FSMContext):
+    await state.set_state(SearchEmployee.query)
+    await message.answer("""Ось доступні анкети:""")
+    with open("data/employee.json", "r") as f:
+        employee = json.load(f)
+    for employee in employee:
+        await message.answer(f"{employee['employee']}", reply_markup=get_workstation_keyboard)
+
+

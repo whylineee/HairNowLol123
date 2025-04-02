@@ -15,6 +15,7 @@ from keyboards.inline_keyboards import get_inline_hs
 from handlers import register_handlers
 from utils.users import add_new_employee
 
+
 # Bot token can be obtained via https://t.me/BotFather
 TOKEN = getenv("BOT_TOKEN")
 dp = Dispatcher()
@@ -34,18 +35,11 @@ async def command_start_handler(message: Message) -> None:
     add_new_employee(message.from_user)
 
 
-# @dp.message()
-# async def echo_handler(message: Message) -> None:
-#     try:
-#         await message.send_copy(chat_id=message.chat.id)
-#     except TypeError:
-#         await message.answer("Nice try!")
 
 
 async def main() -> None:
     bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
     await dp.start_polling(bot)
-
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, stream=sys.stdout)
