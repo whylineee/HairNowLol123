@@ -18,5 +18,5 @@ async def edit_desc_handler(message: types.Message, state: FSMContext):
 async def SearchEmployee(message: types.Message, state: FSMContext):
     await state.update_data(query=message.text)
     data = await state.get_data()
-    print("Querry:", data['query'])
+    print("Query:", data['query'])
     await state.clear()
