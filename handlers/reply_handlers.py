@@ -6,7 +6,7 @@ from keyboards.reply_keyboards import get_quiz_keyboard, get_main_keyboard, get_
 from aiogram.fsm.context import FSMContext
 
 from states.edit_user_states import EditDescUser
-from states.search_state import SearchEmployee
+from states.search_states import SearchEmployee
 
 router = Router()
 
@@ -71,6 +71,16 @@ async def questionnaire_handler(message: types.Message, state: FSMContext):
     with open("data/employee.json", "r") as f:
         employee = json.load(f)
     for employee in employee:
-        await message.answer(f"{employee['employee']}", reply_markup=get_workstation_keyboard)
+        await message.answer(f"{employee['employee']}", reply_markup=get_workstation_keyboard())
 
+@router.message(lambda message: message.text == "Про нову версію бота")
+async def questionnaire_handler(message: types.Message):
+    await message.answer("""Привіт, це найновіша версія бота!""", reply_markup=get_workstation_keyboard())
 
+@router.message(lambda message: message.text == "3. Про нову версію бота")
+async def questionnaire_handler(message: types.Message):
+    await message.answer("""Привіт, це найновіша версія бота!""", reply_markup=get_searchion_keyboard())
+
+@router.message(lambda message: message.text == "1. Запроси друзів – отримай більше лайків 😎 ")
+async def questionnaire_handler(message: types.Message):
+    await message.answer("""ось твій реферальний код""", reply_markup=get_searchion_keyboard())
