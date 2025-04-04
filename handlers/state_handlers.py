@@ -11,7 +11,9 @@ router = Router()
 async def edit_desc_handler(message: types.Message, state: FSMContext):
     await state.update_data(edit_desc=message.text)
     data = await state.get_data()
-    msg_text = edit_field_employee(message, "description", data)
+    msg_text = edit_field_employee(message, "description", {
+        "new_value": data['edit_desc'],
+    })
     await message.answer(msg_text)
     await state.clear()
 
@@ -27,7 +29,9 @@ async def query(message: types.Message, state: FSMContext):
 async def change_e_skills(message: types.Message, state: FSMContext):
     await state.update_data(change_skills=message.text)
     data = await state.get_data()
-    user = message.from_user
-    print("___data", data)
-    print("___user", user)
+    # user = message.from_user
+    txt = edit_field_employee(message, "skills", {
+        "new_value": data['change_skills'],
+    })
+    await message.answer(txt)
     await state.clear()

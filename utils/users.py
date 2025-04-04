@@ -42,9 +42,11 @@ def edit_field_employee(msg, field, value):
 
     for user in emp:
         if user["id"] == data.id:
-            user[field] = value["edit_desc"]
+            user[field] = value["new_value"]
+
+            # msg answer
             msg_text = (f"Your {field} was successfully updated! \n"
-                        f"\n\n{field.capitalize()}: {value['edit_desc']}\n"
+                        f"\n\n{field.capitalize()}: {value['new_value']}\n"
                         f"Name: {data.full_name}\n"
                         f"Username: {data.username}\n"
                         f"Language code: {data.language_code}\n"

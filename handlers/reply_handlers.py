@@ -90,6 +90,6 @@ async def questionnaire_handler(message: types.Message):
     await message.answer("""ось твій реферальний код""", reply_markup=get_searchion_keyboard())
 
 @router.message(lambda message: message.text == "3. Вибрати Технології/Навички")
-async def questionnaire_handler(message: types.Message):
+async def questionnaire_handler(message: types.Message, state: FSMContext):
     await message.answer("""Впишіть ваші технології""",)
     await state.set_state(ChangeSkills.change_e_skills)
