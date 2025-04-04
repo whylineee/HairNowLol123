@@ -1,1 +1,15 @@
-[]
+[
+    {
+        "id": 1387518953,
+        "full_name": "igorich",
+        "username": "igorich_ua",
+        "is_bot": false,
+        "language_code": "en",
+        "status": "new",
+        "role": "company",
+        "profile_img": null,
+        "description": null,
+        "locations": null,
+        "vacancies": []
+    }
+]

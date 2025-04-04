@@ -3,8 +3,8 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 def get_inline_hs() -> InlineKeyboardMarkup:
     keyboard = [
-        [InlineKeyboardButton(text="Працівник", callback_data="test_btn_1"),
-         InlineKeyboardButton(text="Роботодавець", callback_data="test_btn_2")]
+        [InlineKeyboardButton(text="Працівник", callback_data="role_btn_employee"),
+         InlineKeyboardButton(text="Роботодавець", callback_data="role_btn_company")]
     ]
     return InlineKeyboardMarkup(inline_keyboard=keyboard)
 

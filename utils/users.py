@@ -33,6 +33,37 @@ def add_new_employee(data):
     with open("data/employee.json", "w") as f:
         json.dump(emp, f, indent=4)
 
+def add_new_company(data):
+    userDataItem = {
+        "id": data.id,
+        "full_name": data.full_name,
+        "username": data.username,
+        "is_bot": data.is_bot,
+        "language_code": data.language_code,
+        "status": "new",
+        "role": "company",
+        "profile_img": None,
+        "description": None,
+        "locations": None,
+        "vacancies": []
+    }
+
+    # Read from file
+    with open("data/company.json", "r") as file:
+        emp = json.load(file)
+
+    # Check if user already exists
+    for user in emp:
+        if user["id"] == data.id:
+            return
+
+    # Add new user
+    emp.append(userDataItem)
+
+    # Write to file
+    with open("data/company.json", "w") as f:
+        json.dump(emp, f, indent=4)
+
 
 def edit_field_employee(msg, field, value):
     data = msg.from_user
