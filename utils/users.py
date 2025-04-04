@@ -15,8 +15,6 @@ def add_new_employee(data):
         "skills": None,
         "locations": None,
         "experience": None,
-        "direction": None,
-        "salary": None,
     }
 
     # Read from file
@@ -62,3 +60,42 @@ def edit_field_employee(msg, field, value):
         json.dump(emp, f, indent=4)
 
     return msg_text
+
+
+def get_employee_text(employee):
+    txt = (
+        f"👤 Name: {employee['full_name']}\n"
+        f"🔖 Username: {employee['username']}\n"
+    )
+
+    if employee['skills']:
+        txt += f"🛠️ Skills: {employee['skills']}\n"
+    else:
+        txt += "🛠️ Skills: Not specified\n"
+
+    if employee['experience']:
+        txt += f"💼 Experience: {employee['experience']}\n"
+    else:
+        txt += "💼 Experience: Not specified\n\n"
+
+    if employee['description']:
+        txt += f"📝 Description: {employee['description']}\n"
+    else:
+        txt += "📝 Description: Not specified\n"
+
+    if employee['locations']:
+        txt += f"📍 Locations: {employee['locations']}\n"
+    else:
+        txt += "📍 Locations: Not specified\n"
+
+    if employee['profile_img']:
+        txt += f"🖼️ Profile Image: {employee['profile_img']}\n"
+    else:
+        txt += "🖼️ Profile Image: Not specified\n\n"
+
+    if employee['status']:
+        txt += f"📌 Status: {employee['status']}\n"
+    else:
+        txt += "📌 Status: Not specified\n"
+
+    return txt

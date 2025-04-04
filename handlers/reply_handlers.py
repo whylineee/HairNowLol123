@@ -9,6 +9,8 @@ from states.change_skills_py import ChangeSkills
 from states.edit_user_states import EditDescUser
 from states.search_states import SearchEmployee
 
+from utils.users import get_employee_text
+
 router = Router()
 
 
@@ -72,7 +74,8 @@ async def questionnaire_handler(message: types.Message, state: FSMContext):
     with open("data/employee.json", "r") as f:
         employee = json.load(f)
     for employee in employee:
-        await message.answer(f"{employee['employee']}", reply_markup=get_workstation_keyboard())
+        text = get_employee_text(employee)
+        await message.answer(text, reply_markup=get_workstation_keyboard())
 
 @router.message(lambda message: message.text == "Про нову версію бота")
 async def questionnaire_handler(message: types.Message):
