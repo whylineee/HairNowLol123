@@ -5,6 +5,7 @@ from keyboards.reply_keyboards import get_quiz_keyboard, get_main_keyboard, get_
     get_workstation_keyboard, get_workstation_menu_keyboard
 from aiogram.fsm.context import FSMContext
 
+from states.change_skills_py import ChangeSkills
 from states.edit_user_states import EditDescUser
 from states.search_states import SearchEmployee
 
@@ -84,3 +85,8 @@ async def questionnaire_handler(message: types.Message):
 @router.message(lambda message: message.text == "1. Запроси друзів – отримай більше лайків 😎 ")
 async def questionnaire_handler(message: types.Message):
     await message.answer("""ось твій реферальний код""", reply_markup=get_searchion_keyboard())
+
+@router.message(lambda message: message.text == "3. Вибрати Технології/Навички")
+async def questionnaire_handler(message: types.Message):
+    await message.answer("""Впишіть ваші технології""",)
+    await state.set_state(ChangeSkills.change_e_skills)
