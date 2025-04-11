@@ -14,6 +14,7 @@ from keyboards.reply_keyboards import get_main_keyboard, get_searchion_keyboard
 from keyboards.inline_keyboards import get_inline_hs
 from handlers import register_handlers
 from utils.users import add_new_employee
+from utils.users import add_new_company
 
 
 # Bot token can be obtained via https://t.me/BotFather

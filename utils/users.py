@@ -33,10 +33,11 @@ def add_new_employee(data):
     with open("data/employee.json", "w") as f:
         json.dump(emp, f, indent=4)
 
+
 def add_new_company(data):
     userDataItem = {
         "id": data.id,
-        "full_name": data.full_name,
+        "company_name": None,
         "username": data.username,
         "is_bot": data.is_bot,
         "language_code": data.language_code,
@@ -45,7 +46,8 @@ def add_new_company(data):
         "profile_img": None,
         "description": None,
         "locations": None,
-        "vacancies": []
+        "search": None,
+        "salary": None
     }
 
     # Read from file
@@ -63,6 +65,36 @@ def add_new_company(data):
     # Write to file
     with open("data/company.json", "w") as f:
         json.dump(emp, f, indent=4)
+
+
+def edit_field_company(msg, field, value):
+    data = msg.from_user
+    msg_text = ""
+    with open("data/company.json", "r") as file:
+        emp = json.load(file)
+
+    for user in emp:
+        if user["id"] == data.id:
+            user[field] = value["new_value"]
+
+            # msg answer
+            msg_text = (f"Your {field} was successfully updated! \n"
+                        f"\n\n{field.capitalize()}: {value['new_value']}\n"
+                        f"Company_name: {user['company_name']}\n"
+                        f"username: {data.username}\n"
+                        f"language code: {data.language_code}\n"
+                        f"Status: {user['status']}\n"
+                        f"Role: {user['role']}\n"
+                        f"Profile image: {user['profile_img']}\n"
+                        f"description: {user['description']}\n"
+                        f"locations: {user['locations']}\n"
+                        f"Search: {user['search']}\n"
+                        f"Salary: {user['salary']}\n")
+
+    with open("data/company.json", "w") as f:
+        json.dump(emp, f, indent=4)
+
+    return msg_text
 
 
 def edit_field_employee(msg, field, value):
@@ -85,9 +117,8 @@ def edit_field_employee(msg, field, value):
                         f"Role: {user['role']}\n"
                         f"Profile image: {user['profile_img']}\n"
                         f"Description: {user['description']}\n"
-                        f"Skills: {user['skills']}\n"
-                        f"Experience: {user['experience']}\n"
-                        f"Direction: {user['direction']}\n")
+                        f"locations: {user['locations']}\n"
+                        f"Experience: {user['experience']}\n")
 
     with open("data/employee.json", "w") as f:
         json.dump(emp, f, indent=4)
@@ -121,14 +152,30 @@ def get_employee_text(employee):
     else:
         txt += "📍 Locations: Not specified\n"
 
-    if employee['profile_img']:
-        txt += f"🖼️ Profile Image: {employee['profile_img']}\n"
-    else:
-        txt += "🖼️ Profile Image: Not specified\n\n"
 
     if employee['status']:
         txt += f"📌 Status: {employee['status']}\n"
     else:
         txt += "📌 Status: Not specified\n"
+
+    return txt
+
+
+def get_company_text(company):
+    txt = f"🔖 Username: {company.get('username', 'Not specified')}\n"
+
+    txt += f"🏢 Company Name: {company.get('company_name', 'Not specified')}\n"
+
+    txt += f"📝 Description: {company.get('description', 'Not specified')}\n"
+
+    txt += f"📍 Locations: {company.get('locations', 'Not specified') or 'Not specified'}\n"
+
+    txt += f"🖼️ Profile Image: {company.get('profile_img', 'Not specified') or 'Not specified'}\n"
+
+    txt += f"📌 Status: {company.get('status', 'Not specified')}\n"
+
+    txt += f"🔎 Search Tag: {company.get('search', 'Not specified')}\n"
+
+    txt += f"💲 Salary : {company.get('salary', 'Not specified')}\n"
 
     return txt
