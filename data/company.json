@@ -1,16 +1,15 @@
 [
     {
-        "id": 5909955532,
-        "company_name": "test11111",
-        "username": "whylineee",
+        "id": 1387518953,
+        "full_name": "igorich",
+        "username": "igorich_ua",
         "is_bot": false,
-        "language_code": "uk",
+        "language_code": "en",
         "status": "new",
         "role": "company",
         "profile_img": null,
-        "description": "test2222222",
-        "locations": "Truslavets",
-        "search": "11111111111111111111122222",
-        "salary": "1234567"
+        "description": null,
+        "locations": null,
+        "vacancies": []
     }
 ]

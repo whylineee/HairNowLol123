@@ -96,9 +96,8 @@ async def questionnaire_handler(message: types.Message, state: FSMContext):
         employee = json.load(f)
     for employee in employee:
         text = get_employee_text(employee)
-        photo_file = FSInputFile(employee["profile_img"])
-        print("__asd", employee["profile_img"])
         if employee["profile_img"] is not None:
+            photo_file = FSInputFile(employee["profile_img"])
             await message.answer_photo(photo=photo_file, caption=text, reply_markup=get_workstation_keyboard())
         else:
             await message.answer(text, reply_markup=get_workstation_keyboard())
