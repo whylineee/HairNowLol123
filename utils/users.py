@@ -43,7 +43,6 @@ def add_new_company(data):
         "language_code": data.language_code,
         "status": "new",
         "role": "company",
-        "profile_img": None,
         "description": None,
         "locations": None,
         "search": None,
@@ -85,7 +84,6 @@ def edit_field_company(msg, field, value):
                         f"language code: {data.language_code}\n"
                         f"Status: {user['status']}\n"
                         f"Role: {user['role']}\n"
-                        f"Profile image: {user['profile_img']}\n"
                         f"description: {user['description']}\n"
                         f"locations: {user['locations']}\n"
                         f"Search: {user['search']}\n"
@@ -169,8 +167,6 @@ def get_company_text(company):
     txt += f"📝 Description: {company.get('description', 'Not specified')}\n"
 
     txt += f"📍 Locations: {company.get('locations', 'Not specified') or 'Not specified'}\n"
-
-    txt += f"🖼️ Profile Image: {company.get('profile_img', 'Not specified') or 'Not specified'}\n"
 
     txt += f"📌 Status: {company.get('status', 'Not specified')}\n"
 
