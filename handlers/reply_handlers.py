@@ -1,4 +1,5 @@
 import json
+import os
 
 from aiogram import types, Router
 from aiogram.types import FSInputFile
@@ -20,6 +21,7 @@ from states.company_states.search_company import SearchCompany
 from states.company_states.company_locations import LocationsCompany
 from states.company_states.salary_comp import SalaryComp
 from states.upload_media_states import UploadMediaStates
+from states.delete_ancets import DelEmployee
 
 from utils.users import get_employee_text, get_company_text
 
@@ -186,3 +188,77 @@ async def questionnaire_handler(message: types.Message, state: FSMContext):
 async def media_handler(message: types.Message, state: FSMContext):
     await state.set_state(UploadMediaStates.wait_for_photo)
     await message.answer("Please sent photo:")
+
+
+@router.message(lambda message: message.text == "❌Видалити анкету❌")
+async def del_employee(message: types.Message, state: FSMContext):
+    file_path = "data/employee.json"
+
+    if not os.path.exists(file_path):
+        await message.answer("⚠️ Файл employee.json не знайдено.")
+        return
+
+    try:
+        with open(file_path, "r", encoding="utf-8") as f:
+            employees = json.load(f)
+    except Exception as e:
+        await message.answer(f"⚠️ Помилка при зчитуванні файлу: {e}")
+        return
+
+    user_id = str(message.from_user.id)
+    found = False
+
+    updated_employees = []
+    for emp in employees:
+        emp_id = str(emp.get("id"))  # <-- Змінив тут
+        if emp_id != user_id:
+            updated_employees.append(emp)
+        else:
+            found = True
+
+    if found:
+        with open(file_path, "w", encoding="utf-8") as f:
+            json.dump(updated_employees, f, ensure_ascii=False, indent=4)
+
+        await message.answer("✅ Вашу анкету видалено.")
+    else:
+        await message.answer("⚠️ Анкети з вашим ID не знайдено.")
+
+
+
+
+
+
+@router.message(lambda message: message.text == "🗑Видалити анкету🗑")
+async def del_company(message: types.Message, state: FSMContext):
+    file_path = "data/company.json"  # Заміна шляху до файлу
+
+    if not os.path.exists(file_path):
+        await message.answer("⚠️ Файл company.json не знайдено.")
+        return
+
+    try:
+        with open(file_path, "r", encoding="utf-8") as f:
+            companies = json.load(f)
+    except Exception as e:
+        await message.answer(f"⚠️ Помилка при зчитуванні файлу: {e}")
+        return
+
+    user_id = str(message.from_user.id)
+    found = False
+
+    updated_companies = []
+    for comp in companies:
+        comp_id = str(comp.get("id"))  # <-- Тут нічого не змінюється
+        if comp_id != user_id:
+            updated_companies.append(comp)
+        else:
+            found = True
+
+    if found:
+        with open(file_path, "w", encoding="utf-8") as f:
+            json.dump(updated_companies, f, ensure_ascii=False, indent=4)
+
+        await message.answer("✅ Вашу анкету компанії видалено.")
+    else:
+        await message.answer("⚠️ Анкети компанії з вашим ID не знайдено.")
